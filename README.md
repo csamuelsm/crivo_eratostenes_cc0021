@@ -1,1 +1,1 @@
-"# crivo_eratostenes_cc0021" 
+# CC0021 Programação Concorrente - Crivo de Eratóstenes
