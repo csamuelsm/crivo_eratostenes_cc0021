@@ -3,9 +3,9 @@
 
 
 int CrivoDeEratostenes(int n, int printaPrimos) {
-    // criando um vetor booleano para valores de 0 até n
+    // criando um vetor booleano para valores de 0 atï¿½ n
     // e setando todos os valores para true
-    // este vetor irá representar os valores que são primos (true) ou não (false)
+    // este vetor irï¿½ representar os valores que sï¿½o primos (true) ou nï¿½o (false)
     int primos[n+1];
     for (int i = 0; i <= n; i++) {
         primos[i] = 1;
@@ -13,7 +13,7 @@ int CrivoDeEratostenes(int n, int printaPrimos) {
 
     for (int p = 2; p*p <= n; p++) {
         if (primos[p] == 1) {
-            // "remover" opções de primos
+            // "remover" opï¿½ï¿½es de primos
             for (int i = p*p; i <= n; i+=p) {
                 primos[i] = 0;
             }
@@ -35,7 +35,7 @@ int CrivoDeEratostenes(int n, int printaPrimos) {
 
 int main()
 {
-    int primos = CrivoDeEratostenes(100000, 0);
-    printf("\nQuantidade de primos ate 100000: %d\n", primos);
+    int primos = CrivoDeEratostenes(10000000, 0);
+    printf("\nQuantidade de primos ate 10.000.000: %d\n", primos);
     return 0;
 }
