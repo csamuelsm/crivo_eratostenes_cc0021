@@ -8,7 +8,7 @@
 
 Iremos implementar o Crivo de Eratóstenes serial e paralelo (com MP e MPI) inserindo uma entrada de no mínimo 10.000.000 (dez milhões) para a análise de desempenho das implementações.
 
-O algoritmo tem por objetivo encontrar todos os números primos entre [2, N] , sendo $N$ um número natural definido pelo programador.
+O algoritmo tem por objetivo encontrar todos os números primos entre [2, N] , sendo N um número natural definido pelo programador.
 
 O algoritmo está descrito a seguir:
 
