@@ -3,16 +3,16 @@
 #include <time.h>
 
 int CrivoDeEratostenes(int* vetor, int n, int printaPrimos) {
-    // criando um vetor booleano para valores de 0 at� n
+    // criando um vetor booleano para valores de 0 ate n
     // e setando todos os valores para true
-    // este vetor ir� representar os valores que s�o primos (true) ou n�o (false)
+    // este vetor ira representar os valores que sao primos (true) ou nao (false)
     for (int i = 0; i <= n; i++) {
         vetor[i] = 1;
     }
 
     for (int p = 2; p*p <= n; p++) {
         if (vetor[p] == 1) {
-            // "remover" op��es de primos
+            // "remover" opcoes de primos
             for (int i = p*p; i <= n; i+=p) {
                 vetor[i] = 0;
             }
