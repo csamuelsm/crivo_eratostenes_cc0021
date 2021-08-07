@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define ELEMS_PER_PROC 5000000  // aqui é para 2 cores (5000000 * 2) = 10000000
+#define TAM 10000000
+//#define ELEMS_PER_PROC 5000000  // aqui é para 2 cores (5000000 * 2) = 10000000
 
 int main(int argc, char** argv) {
 
@@ -18,7 +19,8 @@ int main(int argc, char** argv) {
 
     double t1 = MPI_Wtime();
 
-    int TAM = ELEMS_PER_PROC * world_size;
+    int ELEMS_PER_PROC = ceil(TAM/world_size);
+    //int TAM = ELEMS_PER_PROC * world_size;
     int sqrtTAM = floor(sqrt(TAM));
 
     int * primos_bloco = malloc(sizeof(int)*(ELEMS_PER_PROC));
