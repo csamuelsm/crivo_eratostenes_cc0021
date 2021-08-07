@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <time.h>
 
 int CrivoDeEratostenes(int* vetor, int n, int printaPrimos) {
     // criando um vetor booleano para valores de 0 at� n
@@ -35,9 +35,14 @@ int CrivoDeEratostenes(int* vetor, int n, int printaPrimos) {
 int main()
 {
     long int n;
+    printf("Digite a quantidade de numeros a ser verificada: ");
     scanf("%ld", &n);
+    clock_t t1 = clock();
     int* primos = (int*) malloc(n * sizeof(int));
     int n_primos = CrivoDeEratostenes(primos, n, 0);
     printf("\nQuantidade de primos ate %ld: %d\n", n, n_primos);
+    free(primos);
+    clock_t t2 = clock();
+    printf("Tempo necessário para rodar: %lf\n", (double)(t2-t1)/CLOCKS_PER_SEC);
     return 0;
 }
