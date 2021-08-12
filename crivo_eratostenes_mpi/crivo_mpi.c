@@ -17,7 +17,9 @@ int main(int argc, char** argv) {
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-    double t1 = MPI_Wtime();
+    if (world_rank == 0) {
+    	double t1 = MPI_Wtime();
+    }
 
     int ELEMS_PER_PROC = ceil(TAM/world_size);
     //int TAM = ELEMS_PER_PROC * world_size;
@@ -104,15 +106,15 @@ int main(int argc, char** argv) {
             //printf("%d\t", primos_total[i]);
         }
         printf("Total primos: %d\n", total);
+
+	double t2 = MPI_Wtime();
+
+    	printf("Tempo necessário para rodar: %lf\n", t2-t1);
     }
 
     MPI_Finalize();
 
     free(primos);
-
-    double t2 = MPI_Wtime();
-
-    printf("Tempo necessário para rodar: %lf\n", t2-t1);
 
     return 0;
 
