@@ -3,38 +3,40 @@
 #include <time.h>
 #include "omp.h"
 
-int CrivoDeEratostenes(int* vetor, int n, int printaPrimos) {
-    int count_primos = 0;
+int CrivoDeEratostenes(int* vetor, long int n, int printaPrimos) {
     
-    #pragma omp parellel num_threads(4)
-    { // REGIÂO PARALELA
-        // criando um vetor booleano para valores de 0 ate n
-        // e setando todos os valores para true
-        // este vetor ira representar os valores que sao primos (true) ou nao (false)
-        #pragma omp for
-        for (int i = 0; i <= n; i++) {
-            vetor[i] = 1;
-        }
+    int count_primos = 0;
 
-        #pragma omp for   
-        for (int p = 2; p*p <= n; p++) {
-            if (vetor[p] == 1) {
-                // "remover" opcoes de primos
-                for (int i = p*p; i <= n; i+=p) {
-                    vetor[i] = 0;
-                }
+    // criando um vetor booleano para valores de 0 ate n
+    // e setando todos os valores para true
+    // este vetor ira representar os valores que sao primos (true) ou nao (false)
+    //#pragma omp for
+    for (int i = 0; i <= n; i++) {
+        vetor[i] = 1;
+    }
+
+    #pragma omp parellel for num_threads(2)
+    { 
+    for (int p = 2; p*p <= n; p++) {
+        if (vetor[p] == 1) {
+            // "remover" opcoes de primos
+            for (int i = p*p; i <= n; i+=p) {
+                vetor[i] = 0;
             }
         }
-
-        #pragma omp for reduction(+ : count_primos)
-        for (int i = 2; i <= n; i++) {
-            if (vetor[i] == 1) {
-                if (printaPrimos == 1){
-                    printf("%d\t", i);
-                }
-                count_primos++;
+    }
+    }
+        
+    #pragma omp parellel for reduction(+: count_primos) num_threads(2)
+    {
+    for (int i = 2; i <= n; i++) {
+        if (vetor[i] == 1) {
+            if (printaPrimos == 1){
+                printf("%d\t", i);
             }
+        count_primos++;
         }
+    }
     }
 
     return count_primos;
@@ -42,9 +44,9 @@ int CrivoDeEratostenes(int* vetor, int n, int printaPrimos) {
 
 int main()
 {
-    long int n;
-    printf("Digite a quantidade de numeros a ser verificada: ");
-    scanf("%ld", &n);
+    long int n = 10000000;
+    //printf("Digite a quantidade de numeros a ser verificada: ");
+    //scanf("%ld", &n);
     clock_t t1 = clock();
     int* primos = (int*) malloc(n * sizeof(int));
     int n_primos = CrivoDeEratostenes(primos, n, 0);
