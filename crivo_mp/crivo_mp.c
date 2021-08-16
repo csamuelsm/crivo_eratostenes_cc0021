@@ -15,7 +15,7 @@ int CrivoDeEratostenes(int* vetor, long int n, int printaPrimos) {
         vetor[i] = 1;
     }
 
-    #pragma omp parellel for num_threads(2)
+    #pragma omp parellel for num_threads(4)
     { 
     for (int p = 2; p*p <= n; p++) {
         if (vetor[p] == 1) {
@@ -27,7 +27,7 @@ int CrivoDeEratostenes(int* vetor, long int n, int printaPrimos) {
     }
     }
         
-    #pragma omp parellel for reduction(+: count_primos) num_threads(2)
+    #pragma omp parellel for reduction(+: count_primos) num_threads(4)
     {
     for (int i = 2; i <= n; i++) {
         if (vetor[i] == 1) {
