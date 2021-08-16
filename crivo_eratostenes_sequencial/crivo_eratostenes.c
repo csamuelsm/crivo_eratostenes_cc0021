@@ -34,9 +34,9 @@ int CrivoDeEratostenes(int* vetor, int n, int printaPrimos) {
 
 int main()
 {
-    long int n;
-    printf("Digite a quantidade de numeros a ser verificada: ");
-    scanf("%ld", &n);
+    long int n = 10000000;
+    //printf("Digite a quantidade de numeros a ser verificada: ");
+    //scanf("%ld", &n);
     clock_t t1 = clock();
     int* primos = (int*) malloc(n * sizeof(int));
     int n_primos = CrivoDeEratostenes(primos, n, 0);
